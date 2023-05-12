@@ -1,0 +1,20 @@
+server:
+  port: 7777
+spring:
+  mvc:
+    path-match:
+      matching-strategy: ant-path-matcher # 兼容问题
+  datasource:
+    url: jdbc:mysql://192.168.4.32:3306/pet?characterEncoding=utf-8&serverTimeZone=UTC&allowPublicKeyRetrieval=true
+    username: root
+    password: 123456
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    hikari:
+      maximum-pool-size: 15
+      minimum-idle: 5
+      idle-timeout: 30000
+
+mybatis-plus:
+  mapper-locations: classpath:mapper/*Mapper.xml
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
