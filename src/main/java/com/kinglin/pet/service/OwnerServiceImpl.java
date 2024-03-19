@@ -1,15 +1,20 @@
 package com.kinglin.pet.service;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.kinglin.pet.dao.OwnerMapper;
 import com.kinglin.pet.entity.Owner;
 import com.kinglin.pet.enums.GenderEnum;
+import com.kinglin.pet.model.LoginUser;
 import com.kinglin.pet.model.Result;
 import com.kinglin.pet.model.vo.OwnerInfoVO;
 import com.kinglin.pet.util.MD5Util;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.Objects;
@@ -23,7 +28,7 @@ import java.util.Objects;
  * @since 2023-05-12
  */
 @Service
-public class OwnerServiceImpl extends ServiceImpl<OwnerMapper, Owner> implements IService<Owner> {
+public class OwnerServiceImpl extends ServiceImpl<OwnerMapper, Owner> implements IService<Owner>, UserDetailsService {
 
     @Autowired
     OwnerMapper ownerMapper;
@@ -64,5 +69,18 @@ public class OwnerServiceImpl extends ServiceImpl<OwnerMapper, Owner> implements
         } else {
             return Result.error("用户名或密码错误");
         }
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        QueryWrapper<Owner> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("displayName", username);
+        Owner owner = baseMapper.selectOne(queryWrapper);
+        if (Objects.isNull(owner)) {
+            throw new UsernameNotFoundException("用户名不存在");
+        }
+        LoginUser loginUser = new LoginUser();
+        loginUser.setOwner(owner);
+        return loginUser;
     }
 }

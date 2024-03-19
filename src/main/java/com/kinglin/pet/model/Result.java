@@ -33,6 +33,11 @@ public class Result<T> {
         this.msg = errorInfo.getMsg();
     }
 
+    public Result(String code, String msg) {
+        this.code = code;
+        this.msg = msg;
+    }
+
     public static <T> Result<T> success() {
         return success(null);
     }
