@@ -12,7 +12,7 @@ import java.util.Map;
 public class WeChatServiceImpl {
 
     private static final String URL = "https://api.weixin.qq.com/sns/jscode2session";
-    private static final String AUTH_CODE= "authorization_code";
+    private static final String AUTH_CODE = "authorization_code";
 
     public Map<String, Object> getUserInfo(WeChatLoginDTO weChatLoginDTO) {
         return null;

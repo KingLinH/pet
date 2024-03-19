@@ -51,31 +51,38 @@ public class AlipayController {
     @Autowired
     private AppointmentServiceImpl appointmentService;
 
-    @GetMapping("/pay") // &subject=xxx&traceNo=xxx&totalAmount=xxx
+    @GetMapping("/pay")
     public void pay(Alipay alipay, HttpServletResponse httpResponse) throws Exception {
         // 1. 创建Client，通用SDK提供的Client，负责调用支付宝的API
         AlipayClient alipayClient = new DefaultAlipayClient(GATEWAY_URL, aliPayConfig.getAppId(),
                 aliPayConfig.getAppPrivateKey(), FORMAT, CHARSET, aliPayConfig.getAlipayPublicKey(), SIGN_TYPE);
 
         // 2. 创建 Request并设置Request参数
-        AlipayTradePagePayRequest request = new AlipayTradePagePayRequest();  // 发送请求的 Request类
+        // 发送请求的 Request类
+        AlipayTradePagePayRequest request = new AlipayTradePagePayRequest();
         request.setNotifyUrl(aliPayConfig.getNotifyUrl());
         JSONObject jsonObject = new JSONObject();
-        jsonObject.set("out_trade_no", alipay.getTradeNo());  // 我们自己生成的订单编号
-        jsonObject.set("total_amount", alipay.getTotalAmount()); // 订单的总金额
-        jsonObject.set("subject", alipay.getSubject());   // 支付的名称
-        jsonObject.set("product_code", "FAST_INSTANT_TRADE_PAY");  // 固定配置
+        // 我们自己生成的订单编号
+        jsonObject.set("out_trade_no", alipay.getTradeNo());
+        // 订单的总金额
+        jsonObject.set("total_amount", alipay.getTotalAmount());
+        // 支付的名称
+        jsonObject.set("subject", alipay.getSubject());
+        // 固定配置
+        jsonObject.set("product_code", "FAST_INSTANT_TRADE_PAY");
         request.setBizContent(jsonObject.toString());
 
         // 执行请求，拿到响应的结果，返回给浏览器
         String form = "";
         try {
-            form = alipayClient.pageExecute(request).getBody(); // 调用SDK生成表单
+            // 调用SDK生成表单
+            form = alipayClient.pageExecute(request).getBody();
         } catch (AlipayApiException e) {
             e.printStackTrace();
         }
+        // 直接将完整的表单html输出到页面
         httpResponse.setContentType("text/html;charset=" + CHARSET);
-        httpResponse.getWriter().write(form);// 直接将完整的表单html输出到页面
+        httpResponse.getWriter().write(form);
         httpResponse.getWriter().flush();
         httpResponse.getWriter().close();
     }
@@ -135,9 +142,12 @@ public class AlipayController {
         // 2. 创建 Request，设置参数
         AlipayTradeRefundRequest request = new AlipayTradeRefundRequest();
         JSONObject bizContent = new JSONObject();
-        bizContent.set("trade_no", alipay.getAlipayTraceNo());  // 支付宝回调的订单流水号
-        bizContent.set("refund_amount", alipay.getTotalAmount());  // 订单的总金额
-        bizContent.set("out_request_no", alipay.getTradeNo());   //  我的订单编号
+        // 支付宝回调的订单流水号
+        bizContent.set("trade_no", alipay.getAlipayTraceNo());
+        // 订单的总金额
+        bizContent.set("refund_amount", alipay.getTotalAmount());
+        // 我的订单编号
+        bizContent.set("out_request_no", alipay.getTradeNo());
 
         // 返回参数选项，按需传入
         //JSONArray queryOptions = new JSONArray();
@@ -148,13 +158,15 @@ public class AlipayController {
 
         // 3. 执行请求
         AlipayTradeRefundResponse response = alipayClient.execute(request);
-        if (response.isSuccess()) {  // 退款成功，isSuccess 为true
+        if (response.isSuccess()) {
+            // 退款成功，isSuccess 为true
             System.out.println("调用成功");
 
             // 4. 退款，更新数据库状态
             appointmentService.updatePayState(alipay.getTradeNo(), PayStateEnum.REFUNDED);
             return Result.success();
-        } else {   // 退款失败，isSuccess 为false
+        } else {
+            // 退款失败，isSuccess 为false
             System.out.println(response.getBody());
             return Result.error(response.getCode(), response.getBody());
         }

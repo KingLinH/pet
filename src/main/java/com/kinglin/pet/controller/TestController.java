@@ -25,7 +25,7 @@ public class TestController {
 
         int result = 1 / 0;
 
-        Owner owner =null;
+        Owner owner = null;
 
         owner.getId();
 

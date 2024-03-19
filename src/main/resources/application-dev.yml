@@ -13,9 +13,12 @@ spring:
       maximum-pool-size: 15
       minimum-idle: 5
       idle-timeout: 30000
-  security:
-    username: admin
-    password: admin
+
+  redis:
+    host: 192.168.0.103
+    port: 6379
+    database: 0
+
 
 mybatis-plus:
   mapper-locations: classpath:/mapper/*Mapper.xml

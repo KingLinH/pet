@@ -1,5 +1,6 @@
 package com.kinglin.pet.util;
 
+import cn.hutool.core.lang.UUID;
 import io.jsonwebtoken.Jwts;
 
 import java.security.MessageDigest;
@@ -7,7 +8,6 @@ import java.security.NoSuchAlgorithmException;
 import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.Random;
-import java.util.UUID;
 
 /**
  * @author huangjl
@@ -26,7 +26,7 @@ public class TokenUtil {
             uuid = getIssuerFromToken(accessToken);
         }
         if (StringUtils.isBlank(uuid)) {
-            uuid = USER_CACHE_FLAG.TOKEN + UUID.randomUUID().toString().replace("-", "");
+            uuid = USER_CACHE_FLAG.TOKEN + UUID.fastUUID();
         }
 
         String tokenSecret = getTokenSecret();

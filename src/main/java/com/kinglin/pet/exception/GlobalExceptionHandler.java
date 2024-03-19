@@ -19,10 +19,10 @@ import javax.servlet.http.HttpServletRequest;
 public class GlobalExceptionHandler {
 
     /**
-     * @description 自定义异常处理
      * @param request
      * @param exception
      * @return Result<?>
+     * @description 自定义异常处理
      * @date 2023/5/12 16:50
      */
     @ExceptionHandler(value = PetException.class)
@@ -32,10 +32,10 @@ public class GlobalExceptionHandler {
     }
 
     /**
-     * @description 其他异常处理
      * @param request
      * @param exception
      * @return Result<?>
+     * @description 其他异常处理
      * @date 2023/5/12 16:51
      */
     @ExceptionHandler(value = Exception.class)

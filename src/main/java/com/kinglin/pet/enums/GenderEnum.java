@@ -27,6 +27,7 @@ public enum GenderEnum {
         }
         return OTHER;
     }
+
     public static GenderEnum enumByName(String name) {
         for (GenderEnum genderEnum : GenderEnum.values()) {
             if (genderEnum.name.equals(name)) {
@@ -35,6 +36,7 @@ public enum GenderEnum {
         }
         return OTHER;
     }
+
     public static GenderEnum enumByValue(String value) {
         for (GenderEnum genderEnum : GenderEnum.values()) {
             if (genderEnum.value.equals(value)) {

@@ -12,8 +12,8 @@ import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfi
 @MapperScan("com.kinglin.pet.dao")
 public class PetApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(PetApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(PetApplication.class, args);
+    }
 
 }

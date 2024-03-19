@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.annotation.Resource;
 import java.util.Map;
 
 /**
@@ -22,7 +23,7 @@ import java.util.Map;
 @RestController
 @RequestMapping(Constant.API_NAME + "/auth")
 public class AuthController {
-    @Autowired
+    @Resource
     private LoginService loginService;
 
     @PostMapping("/login")
