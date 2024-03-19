@@ -2,4 +2,19 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.kinglin.pet.dao.AppointmentMapper">
 
+    <select id="getBySn" resultType="com.kinglin.pet.entity.Appointment">
+        select * from appointment where sn = #{sn}
+    </select>
+
+    <select id="getByTradeNo" resultType="com.kinglin.pet.entity.Appointment">
+        select * from appointment where trade_no = #{tradeNo}
+    </select>
+
+    <update id="updateState">
+        update appointment set
+        pay_state_no = #{payStateNo},
+        gmt_payment = #{gmtPayment},
+        trade_no = #{tradeNo}
+        where sn = #{sn}
+    </update>
 </mapper>

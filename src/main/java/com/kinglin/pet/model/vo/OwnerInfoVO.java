@@ -10,14 +10,16 @@ import lombok.Data;
 @Data
 public class OwnerInfoVO {
 
-    private String realName;
-
     private String displayName;
+
+    private String avatarUrl;
 
     private String gender;
 
-    private String phone;
+    private String city;
 
-    private String email;
+    private String country;
+
+    private String province;
 
 }

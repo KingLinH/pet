@@ -1,6 +1,6 @@
 package com.kinglin.pet.dao;
 
-import com.kinglin.pet.entity.AppointmentService;
+import com.kinglin.pet.entity.Service;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 /**
@@ -11,6 +11,6 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * @author huangjl
  * @since 2023-05-12
  */
-public interface ServiceMapper extends BaseMapper<AppointmentService> {
+public interface ServiceMapper extends BaseMapper<Service> {
 
 }

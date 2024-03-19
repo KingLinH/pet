@@ -1,8 +1,8 @@
-package com.kinglin.pet.service.impl;
+package com.kinglin.pet.service;
 
+import com.baomidou.mybatisplus.extension.service.IService;
 import com.kinglin.pet.entity.Pet;
 import com.kinglin.pet.dao.PetMapper;
-import com.kinglin.pet.service.PetService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +15,6 @@ import org.springframework.stereotype.Service;
  * @since 2023-05-12
  */
 @Service
-public class PetServiceImpl extends ServiceImpl<PetMapper, Pet> implements PetService {
+public class PetServiceImpl extends ServiceImpl<PetMapper, Pet> implements IService<Pet> {
 
 }

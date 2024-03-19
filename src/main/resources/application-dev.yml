@@ -5,7 +5,7 @@ spring:
     path-match:
       matching-strategy: ant-path-matcher # 兼容问题
   datasource:
-    url: jdbc:mysql://192.168.4.32:3306/pet?characterEncoding=utf-8&serverTimeZone=UTC&allowPublicKeyRetrieval=true
+    url: jdbc:mysql://192.168.5.144:3306/pet?characterEncoding=utf-8&serverTimeZone=UTC&allowPublicKeyRetrieval=true
     username: root
     password: 123456
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -13,8 +13,17 @@ spring:
       maximum-pool-size: 15
       minimum-idle: 5
       idle-timeout: 30000
+  security:
+    username: admin
+    password: admin
 
 mybatis-plus:
-  mapper-locations: classpath:mapper/*Mapper.xml
+  mapper-locations: classpath:/mapper/*Mapper.xml
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+alipay:
+  appId: 9021000135641572
+  appPrivateKey: MIIEvwIBADANBgkqhkiG9w0BAQEFAASCBKkwggSlAgEAAoIBAQCQWgYs3gMFvGv7VFZi//BYUH8C0ZrRRqRZ0lnXiwRS8QTtIQmpG0K2Cpo/c0W9RIjl6dDDJ1SV/q2osLe9hFm3C3XxJ2tUmIF0OAneCoVWN3rJ9fWi6RUXFe2+2ZiZgJwnjwhXzi1gsivFJy6ciZfZGQXESRjsZXy1yN6fcveDHXT5kEf5jklXy3vGNTz7o+sFkT9d2JgLeVrt8dY0Pol58XorcWuSWAyTyTXu64jmGWCgM2RLRUeMSFYA0UC0p5UXzbOj6kM539QYpbnyT5goaL4c3nFEvM8+RLUfE0xgHAuB6tjQtjPPu+GLdAV/SmjK+cG663hqq6TUMm1lYNX1AgMBAAECggEAGW1CGTUiIyiFfMfmT5n1pBjJxp1VP/fJi2jaGnWKVXHPBFYFdZwvrBFCClsrtaMU2irNcxLCe4lY3ZYDR4bAptWF+OyQo14Zr3cPheUkh4NORbTlh8S2ylI6hpudnaxh1TYEqjLPG3FG9HtqYnh6HuuhcGnP0hQuW3b+f+eoYZfS8UV7tlDaKcPa0PbvZQKHxLF3xD9L25gAtbySK5zoxvPSxsAapjya2LJ+cevrsXYqa5+OjuM6kzrhAeBUMEZuYqCVHlgkZXEujS0Ze1z/xv2DJwJqWnZWPwvZVGaYaBp5Q8cAnFNAIBN1arrdty7ZndKG8R6h9h1x5dZuL1omIQKBgQDI1cN4eMz5Jqe9SuK0t2n0sV+OuE9ISbq6IEc2+xk5UZ+1uwj36MO/0lJkNRudRPdZwxtggXTNOshgCQ7pVQmDysDUmsO+H/EzmDUqG94SD2J/nmBbqVjop3jyzx7b9+bOjhTIzQ/wkrHwf1Hz0IukoOoTdousbboDCr/InmSv6wKBgQC4AHyC9K3JqJRL8lMOeh2l+u4tD3hHLViF4zF0SU9wXDKuvPwGPQWjvtyrqZ2W4uj+IYeOYO0vfH00qjO/f6uUjz8VWLCo/ccnXkvePef2fG7eD6qVaP2yqp6C+Nldzt0JMCYnW7xXCM0lbEgzsxRCYBQwDIte9EOYIlJxjjT5nwKBgQCOMMp0QRLeU7/vBVX9HN6nn+1H3rZDN/A8Vx4UjzMMof2xbPqsiuAMr5wl1nP2pR17L+fyK7XGmBfF5qPoD4ztAmAEJo7vzS24mcsKRTC1GK9kK32NaBjKn8fCIWJ32sxO8clFYeonKbVR0NL1DHHR3RvdK9E4A3fvL20ZXQtsgQKBgQCWV29k4N8OojtpQnoynfyTnc/16WnxXk+yNcw2o5/QwsR2mduijUGKZWyQpmoo2wZcfrDv2Kpz3le/LEJT+dEL9W8p1emiapjKxfVfhV1+vHUp48sRgVOpJFeX1BRm3Zsk4r6J8h6VTo+wQCVOeMfY5AAasmU+FH8WUxThy7vlKQKBgQCtEkjlcDNFAkd876t4z6VhEMFXcK1qHKM4iFy3t5lpd+RlBWNvi3mHqftntkF9ZwtEM+cVD57bQh2JjKo5GWsR1S4fUdC0+JBwol0I3DfS11TULiiaIRlkuQujR/7eHDx3tWP/ZJwOeelPtHA0Mx0lGaIJXK0VVCKzwOWG0UDxfQ==
+  alipayPublicKey: MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAuYhVMzterZ+knOszg9PpOK0eQoEkJbqAeSAj3lEWMq/VVSoPBJqrgKzRJ1+nNrBIMI7OHIdtR3fqA3Ojt1U6O8OwlGKXIf3Fx5julq6oE4f6x776KqByi6pqYQ5rg94qW/AEs7EqVhaMAA6mvez32wpY8XkRxjBUtOmwPvOtZcJi6UcRPGH7xGvqvZGxBPYYBHcX7ufnKP04dR+v9xVcFFoq98l8yrldvksYiOtJ+zr2CByXys4JtuOB8EaxG5VBto23uTtVhaHeq0oxJ78vsngceTCNZMeGO04UXEvIeesxHSwUYlNJjzztJOeqGIvXzpmvZUGz+lxLQ/RyIMaLuwIDAQAB
+  notifyUrl: localhost:7777/api/pet/alipay/notify

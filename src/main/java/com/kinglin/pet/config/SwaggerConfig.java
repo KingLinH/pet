@@ -32,7 +32,7 @@ public class SwaggerConfig {
 
     private ApiInfo apiInfo() {
         return new ApiInfo(
-                "宠物服务预约API文档",
+                "《城宠万千》宠物服务预约API文档",
                 "该文档用于测试API接口",
                 "1.0.0",
                 "urn:tos",

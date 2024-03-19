@@ -1,7 +1,7 @@
 package com.kinglin.pet.dao;
 
-import com.kinglin.pet.entity.Store;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.kinglin.pet.entity.Store;
 
 /**
  * <p>

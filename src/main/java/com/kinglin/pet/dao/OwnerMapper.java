@@ -1,8 +1,8 @@
 package com.kinglin.pet.dao;
 
-import com.kinglin.pet.entity.Owner;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.kinglin.pet.model.vo.OwnerInfoVO;
+import com.kinglin.pet.entity.Owner;
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 /**
@@ -13,7 +13,7 @@ import org.apache.ibatis.annotations.Param;
  * @author huangjl
  * @since 2023-05-12
  */
+@Mapper
 public interface OwnerMapper extends BaseMapper<Owner> {
-
-    OwnerInfoVO getOwnerInfo(@Param("ownerId") String ownerId);
+    Owner getByDisplayName(@Param("displayName") String displayName);
 }

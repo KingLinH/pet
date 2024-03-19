@@ -1,14 +1,15 @@
 package com.kinglin.pet.entity;
 
-import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
-import java.io.Serializable;
-import java.math.BigDecimal;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
+
+import java.io.Serial;
+import java.io.Serializable;
+import java.math.BigDecimal;
 
 /**
  * <p>
@@ -21,12 +22,13 @@ import lombok.Data;
 @Data
 @TableName("service")
 @ApiModel(value = "Service对象", description = "服务信息表")
-public class AppointmentService implements Serializable {
+public class Service implements Serializable {
 
+    @Serial
     private static final long serialVersionUID = 1L;
 
     @ApiModelProperty("主键")
-    @TableId(value = "id", type = IdType.AUTO)
+    @TableId(value = "id")
     private Long id;
 
     @ApiModelProperty("服务名称")

@@ -1,18 +1,16 @@
 package com.kinglin.pet.entity;
 
 import com.baomidou.mybatisplus.annotation.FieldFill;
-import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
-import java.io.Serializable;
-import java.time.LocalDateTime;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.experimental.Accessors;
+
+import java.io.Serial;
+import java.io.Serializable;
+import java.time.LocalDateTime;
 
 /**
  * <p>
@@ -27,11 +25,16 @@ import lombok.experimental.Accessors;
 @ApiModel(value = "Appointment对象", description = "预约信息表")
 public class Appointment implements Serializable {
 
+    @Serial
     private static final long serialVersionUID = 1L;
 
     @ApiModelProperty("主键")
-    @TableId(value = "id", type = IdType.AUTO)
+    @TableId(value = "id")
     private Long id;
+
+    @ApiModelProperty("单号")
+    @TableField("sn")
+    private String sn;
 
     @ApiModelProperty("开始时间")
     @TableField("start_time")
@@ -69,5 +72,16 @@ public class Appointment implements Serializable {
     @TableField("appointment_time")
     private LocalDateTime appointmentTime;
 
+    @ApiModelProperty("支付状态")
+    @TableField("pay_state_no")
+    private Byte payStateNo;
+
+    @ApiModelProperty("支付宝交易凭证")
+    @TableField("trade_no")
+    private String tradeNo;
+
+    @ApiModelProperty("付款时间")
+    @TableField("gmt_payment")
+    private String gmtPayment;
 
 }
