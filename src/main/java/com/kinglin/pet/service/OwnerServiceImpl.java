@@ -10,13 +10,17 @@ import com.kinglin.pet.model.LoginUser;
 import com.kinglin.pet.model.Result;
 import com.kinglin.pet.model.vo.OwnerInfoVO;
 import com.kinglin.pet.util.MD5Util;
+import io.swagger.models.auth.In;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import java.util.Objects;
 
 /**
@@ -30,10 +34,13 @@ import java.util.Objects;
 @Service
 public class OwnerServiceImpl extends ServiceImpl<OwnerMapper, Owner> implements IService<Owner>, UserDetailsService {
 
-    @Autowired
+    @Resource
     OwnerMapper ownerMapper;
+    @Lazy
+    @Resource
+    PasswordEncoder passwordEncoder;
 
-    public Result<OwnerInfoVO> getOwnerInfo(Long ownerId) {
+    public Result<OwnerInfoVO> getInfo(Long ownerId) {
         Owner owner = ownerMapper.selectById(ownerId);
         OwnerInfoVO ownerInfoVO = new OwnerInfoVO();
         if (owner != null) {
@@ -48,27 +55,23 @@ public class OwnerServiceImpl extends ServiceImpl<OwnerMapper, Owner> implements
         }
         // TODO 校验
         owner.setGender(GenderEnum.enumByName(owner.getGender()).getValue());
-        owner.setSalt(MD5Util.getSalt(32));
-        owner.setPassword(MD5Util.encode(MD5Util.encode(owner.getPassword(), owner.getSalt()), owner.getSalt()));
+        owner.setPassword(passwordEncoder.encode(owner.getPassword()));
         int insert = ownerMapper.insert(owner);
         if (insert > 0) {
             return Result.success(owner.getId());
         }
-        return Result.error("新增用户失败");
+        return Result.error("添加用户失败");
     }
 
-    public Result<OwnerInfoVO> login(String username, String password) {
-        Owner owner = ownerMapper.getByUsername(username);
-        if (Objects.isNull(owner)) {
-            return Result.error("用户不存在");
+    public Result<Integer> updatePassword(Long id, String orgPassword, String newPassword) {
+        Owner owner = ownerMapper.selectById(id);
+        if (!owner.getPassword().equals(passwordEncoder.encode(orgPassword))) {
+            Result.error("原密码错误");
         }
-        if (MD5Util.encode(MD5Util.encode(password, owner.getSalt()), owner.getSalt()).equals(owner.getPassword())) {
-            OwnerInfoVO ownerInfoVO = new OwnerInfoVO();
-            BeanUtils.copyProperties(owner, ownerInfoVO);
-            return Result.success(ownerInfoVO);
-        } else {
-            return Result.error("用户名或密码错误");
-        }
+        Owner updateOwner = new Owner();
+        updateOwner.setId(owner.getId());
+        updateOwner.setPassword(passwordEncoder.encode(newPassword));
+        return Result.success(ownerMapper.updateById(updateOwner));
     }
 
     @Override
