@@ -1,11 +1,12 @@
 package com.kinglin.pet.entity;
 
-import com.baomidou.mybatisplus.annotation.*;
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
-import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
@@ -22,7 +23,6 @@ import java.time.LocalDateTime;
 @ApiModel(value = "Owner对象", description = "用户信息表")
 public class Owner implements Serializable {
 
-    @Serial
     private static final long serialVersionUID = 1L;
 
     @ApiModelProperty("主键")
@@ -34,8 +34,8 @@ public class Owner implements Serializable {
     private String realName;
 
     @ApiModelProperty("用户名")
-    @TableField("display_name")
-    private String displayName;
+    @TableField("username")
+    private String username;
 
     @ApiModelProperty("手机号")
     @TableField("phone")

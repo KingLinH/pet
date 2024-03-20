@@ -8,7 +8,6 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
-import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
@@ -25,7 +24,6 @@ import java.time.LocalDateTime;
 @ApiModel(value = "Appointment对象", description = "预约信息表")
 public class Appointment implements Serializable {
 
-    @Serial
     private static final long serialVersionUID = 1L;
 
     @ApiModelProperty("主键")

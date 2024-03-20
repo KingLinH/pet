@@ -10,7 +10,7 @@ import lombok.Data;
 @Data
 public class OwnerInfoVO {
 
-    private String displayName;
+    private String username;
 
     private String avatarUrl;
 

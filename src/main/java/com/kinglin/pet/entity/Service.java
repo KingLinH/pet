@@ -7,7 +7,6 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
-import java.io.Serial;
 import java.io.Serializable;
 import java.math.BigDecimal;
 
@@ -24,7 +23,6 @@ import java.math.BigDecimal;
 @ApiModel(value = "Service对象", description = "服务信息表")
 public class Service implements Serializable {
 
-    @Serial
     private static final long serialVersionUID = 1L;
 
     @ApiModelProperty("主键")
