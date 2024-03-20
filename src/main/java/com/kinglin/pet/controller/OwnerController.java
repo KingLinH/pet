@@ -47,11 +47,11 @@ public class OwnerController {
     @PostMapping("/login")
     @ApiModelProperty(value = "登录")
     @ApiImplicitParams({
-            @ApiImplicitParam(value = "用户名", name = "displayName", required = true),
+            @ApiImplicitParam(value = "用户名", name = "username", required = true),
             @ApiImplicitParam(value = "密码", name = "password", required = true)
     })
-    public Result<OwnerInfoVO> login(String displayName, String password) {
-        return ownerServiceImpl.login(displayName, password);
+    public Result<OwnerInfoVO> login(String username, String password) {
+        return ownerServiceImpl.login(username, password);
     }
 
 }

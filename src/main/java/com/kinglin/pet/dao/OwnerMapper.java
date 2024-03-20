@@ -15,5 +15,5 @@ import org.apache.ibatis.annotations.Param;
  */
 @Mapper
 public interface OwnerMapper extends BaseMapper<Owner> {
-    Owner getByDisplayName(@Param("displayName") String displayName);
+    Owner getByUsername(@Param("username") String username);
 }

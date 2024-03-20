@@ -57,8 +57,8 @@ public class OwnerServiceImpl extends ServiceImpl<OwnerMapper, Owner> implements
         return Result.error("新增用户失败");
     }
 
-    public Result<OwnerInfoVO> login(String displayName, String password) {
-        Owner owner = ownerMapper.getByDisplayName(displayName);
+    public Result<OwnerInfoVO> login(String username, String password) {
+        Owner owner = ownerMapper.getByUsername(username);
         if (Objects.isNull(owner)) {
             return Result.error("用户不存在");
         }
@@ -74,7 +74,7 @@ public class OwnerServiceImpl extends ServiceImpl<OwnerMapper, Owner> implements
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         QueryWrapper<Owner> queryWrapper = new QueryWrapper<>();
-        queryWrapper.eq("displayName", username);
+        queryWrapper.eq("username", username);
         Owner owner = baseMapper.selectOne(queryWrapper);
         if (Objects.isNull(owner)) {
             throw new UsernameNotFoundException("用户名不存在");

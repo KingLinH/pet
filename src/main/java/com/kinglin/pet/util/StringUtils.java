@@ -29,4 +29,19 @@ public class StringUtils {
     public static boolean isNotBlank(final CharSequence cs) {
         return !isBlank(cs);
     }
+
+    /**
+     * 校验是否为null（包含空格）
+     */
+    public static boolean isEmpty(final CharSequence cs) {
+        return null == cs || cs.length() == 0;
+    }
+
+    /**
+     * 校验是否不为null（包含空格）
+     */
+    public static boolean isNotEmpty(final CharSequence cs) {
+        return !isEmpty(cs);
+    }
+
 }

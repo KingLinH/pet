@@ -1,6 +1,7 @@
 package com.kinglin.pet.filter;
 
 import com.kinglin.pet.model.LoginUser;
+import com.kinglin.pet.util.RedisUtil;
 import com.kinglin.pet.util.StringUtils;
 import com.kinglin.pet.util.TokenUtil;
 import lombok.SneakyThrows;
@@ -49,7 +50,7 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
             log.error("当前token已过期");
             throw new AuthenticationException("当前token已过期");
         }
-        String id = tokenUtil.getIdFromToken();
+        String id = tokenUtil.getIdFromToken(token);
 
         // 从redis中获取用户信息
         LoginUser loginUser = redisUtil.getObject("security:" + id, LoginUser.class);

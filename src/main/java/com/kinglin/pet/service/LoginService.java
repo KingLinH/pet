@@ -11,6 +11,7 @@ import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -22,6 +23,7 @@ import java.util.concurrent.TimeUnit;
  * @description
  * @since 2024-03-19 18:48
  */
+@Service
 public class LoginService {
 
     @Autowired
@@ -57,7 +59,7 @@ public class LoginService {
         // 获取SecurityContextHolder中的用户信息
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         LoginUser principal = (LoginUser) authentication.getPrincipal();
-        RedisUtil.removeCache("security:" + principal.getOwner().getId());
+        redisUtil.removeCache("security:" + principal.getOwner().getId());
         return Result.success("退出成功");
     }
 }
