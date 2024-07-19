@@ -15,6 +15,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Objects;
@@ -48,8 +50,9 @@ public class OwnerServiceImpl extends ServiceImpl<OwnerMapper, Owner> implements
         }
         // TODO 校验
         owner.setGender(GenderEnum.enumByName(owner.getGender()).getValue());
-        owner.setSalt(MD5Util.getSalt(32));
-        owner.setPassword(MD5Util.encode(MD5Util.encode(owner.getPassword(), owner.getSalt()), owner.getSalt()));
+        // owner.setSalt(MD5Util.getSalt(32));
+        PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        owner.setPassword(passwordEncoder.encode(owner.getPassword()));
         int insert = ownerMapper.insert(owner);
         if (insert > 0) {
             return Result.success(owner.getId());
@@ -80,7 +83,8 @@ public class OwnerServiceImpl extends ServiceImpl<OwnerMapper, Owner> implements
             throw new UsernameNotFoundException("用户名不存在");
         }
         LoginUser loginUser = new LoginUser();
-        loginUser.setOwner(owner);
+        BeanUtils.copyProperties(owner, loginUser);
+        // loginUser.setOwner(owner);
         return loginUser;
     }
 }

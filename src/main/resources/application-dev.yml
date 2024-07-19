@@ -5,7 +5,8 @@ spring:
     path-match:
       matching-strategy: ant-path-matcher # 兼容问题
   datasource:
-    url: jdbc:mysql://192.168.5.144:3306/pet?characterEncoding=utf-8&serverTimeZone=UTC&allowPublicKeyRetrieval=true
+    # url: jdbc:mysql://192.168.5.144:3306/pet?characterEncoding=utf-8&serverTimeZone=UTC&allowPublicKeyRetrieval=true
+    url: jdbc:mysql://192.168.18.128:33065/pet?characterEncoding=utf-8&serverTimeZone=UTC&allowPublicKeyRetrieval=true
     username: root
     password: 123456
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -16,7 +17,7 @@ spring:
 
   redis:
     # host: 192.168.0.103
-    host: 127.0.0.1
+    host: 192.168.18.128
     port: 6379
     database: 0
     # 连接超时时间（毫秒）
@@ -36,7 +37,12 @@ spring:
         minEvictableIdleTimeMills: 60000
         timeBetweenEvictionRunsMillis: 30000
         numTestsPerEvictionRun: -1
-
+  rabbitmq:
+    host: 192.168.18.128
+    port: 5672
+    username: guest
+    password: guest
+    virtualHost: /
 
 mybatis-plus:
   mapper-locations: classpath:/mapper/*Mapper.xml

@@ -84,7 +84,7 @@ public class SecurityConfig {
         // 配置异常捕获
         http.exceptionHandling().authenticationEntryPoint(authenticationEntryPoint).accessDeniedHandler(accessDeniedHandler);
         http.authorizeRequests()
-                .antMatchers("/api/pet/auth/login").anonymous()
+                .antMatchers("/api/pet/auth/login","/api/pet/owner").anonymous()
                 .and()
                 .authorizeRequests()
                 .anyRequest().authenticated();

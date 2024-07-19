@@ -1,6 +1,5 @@
 package com.kinglin.pet.service;
 
-import com.kinglin.pet.entity.Owner;
 import com.kinglin.pet.model.LoginUser;
 import com.kinglin.pet.model.Result;
 import com.kinglin.pet.util.RedisUtil;
@@ -46,12 +45,12 @@ public class LoginService {
 
         // 认证通过，使用用户id生产一个jwt，jwt存入返回值中
         LoginUser principal = (LoginUser) authenticate.getPrincipal();
-        Owner owner = principal.getOwner();
-        String token = tokenUtil.generateLoginToken(String.valueOf(owner.getId()), null);
+        // Owner owner = principal.getOwner();
+        String token = tokenUtil.generateLoginToken(String.valueOf(principal.getId()), null);
         Map<String, String> map = new HashMap<>();
         map.put("token", token);
         // 把完整的用户信息存入redis
-        redisUtil.setExObjectValue("security:" + owner.getId(), principal, 60, TimeUnit.SECONDS);
+        redisUtil.setExObjectValue("security:" + principal.getId(), principal, 60, TimeUnit.SECONDS);
         return Result.success(map);
     }
 
@@ -59,7 +58,7 @@ public class LoginService {
         // 获取SecurityContextHolder中的用户信息
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         LoginUser principal = (LoginUser) authentication.getPrincipal();
-        redisUtil.removeCache("security:" + principal.getOwner().getId());
+        redisUtil.removeCache("security:" + principal.getId());
         return Result.success("退出成功");
     }
 }
