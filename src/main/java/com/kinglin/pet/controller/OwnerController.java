@@ -9,11 +9,9 @@ import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import javax.annotation.Resource;
 
 /**
  * <p>
@@ -27,14 +25,14 @@ import org.springframework.web.bind.annotation.RestController;
 @ApiModel("用户")
 @RequestMapping(Constant.API_NAME + "/owner")
 public class OwnerController {
-    @Autowired
+    @Resource
     OwnerServiceImpl ownerServiceImpl;
 
     @GetMapping
     @ApiModelProperty(value = "根据用户id查询用户信息")
     @ApiImplicitParam(value = "用户id", name = "ownerId", required = true)
-    public Result<OwnerInfoVO> getOwnerInfo(Long ownerId) {
-        return ownerServiceImpl.getOwnerInfo(ownerId);
+    public Result<OwnerInfoVO> getInfo(Long ownerId) {
+        return ownerServiceImpl.getInfo(ownerId);
     }
 
     @PostMapping
@@ -44,14 +42,22 @@ public class OwnerController {
         return ownerServiceImpl.add(owner);
     }
 
-    @PostMapping("/login")
-    @ApiModelProperty(value = "登录")
+    @PutMapping
+    @ApiModelProperty(value = "修改用户信息")
+    @ApiImplicitParam(value = "用户信息", name = "owner", required = true)
+    public Result<Boolean> updateById(Owner owner) {
+        return Result.success(ownerServiceImpl.updateById(owner));
+    }
+
+    @PostMapping("/update/password")
+    @ApiModelProperty(value = "修改用户密码")
     @ApiImplicitParams({
-            @ApiImplicitParam(value = "用户名", name = "username", required = true),
-            @ApiImplicitParam(value = "密码", name = "password", required = true)
+            @ApiImplicitParam(value = "id", name = "id", required = true),
+            @ApiImplicitParam(value = "旧密码", name = "orgPassword", required = true),
+            @ApiImplicitParam(value = "新密码", name = "newPassword", required = true)
     })
-    public Result<OwnerInfoVO> login(String username, String password) {
-        return ownerServiceImpl.login(username, password);
+    public Result<Integer> updatePassword(Long id, String orgPassword, String newPassword) {
+        return ownerServiceImpl.updatePassword(id, orgPassword, newPassword);
     }
 
 }
