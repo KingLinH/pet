@@ -9,16 +9,11 @@ import com.kinglin.pet.enums.GenderEnum;
 import com.kinglin.pet.model.LoginUser;
 import com.kinglin.pet.model.Result;
 import com.kinglin.pet.model.vo.OwnerInfoVO;
-import com.kinglin.pet.util.MD5Util;
-import io.swagger.models.auth.In;
 import org.springframework.beans.BeanUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
