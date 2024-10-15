@@ -84,7 +84,7 @@ public class OwnerServiceImpl extends ServiceImpl<OwnerMapper, Owner> implements
         }
         LoginUser loginUser = new LoginUser();
         BeanUtils.copyProperties(owner, loginUser);
-        // loginUser.setOwner(owner);
+        loginUser.setOwner(owner);
         return loginUser;
     }
 }

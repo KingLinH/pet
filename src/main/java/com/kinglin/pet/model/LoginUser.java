@@ -17,7 +17,7 @@ import java.util.Collection;
 @Data
 public class LoginUser extends Owner implements UserDetails {
 
-    // private Owner owner;
+    private Owner owner;
 
     /**
      * 从数据库中查询到的权限存在这里
