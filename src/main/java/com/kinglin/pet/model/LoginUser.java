@@ -2,6 +2,7 @@ package com.kinglin.pet.model;
 
 import com.kinglin.pet.entity.Owner;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -12,8 +13,9 @@ import java.util.Collection;
  * @description
  * @since 2024-03-19 18:38
  */
+@EqualsAndHashCode(callSuper = true)
 @Data
-public class LoginUser implements UserDetails {
+public class LoginUser extends Owner implements UserDetails {
 
     private Owner owner;
 
@@ -42,12 +44,12 @@ public class LoginUser implements UserDetails {
 
     @Override
     public String getPassword() {
-        return owner.getPassword();
+        return super.getPassword();
     }
 
     @Override
     public String getUsername() {
-        return owner.getUsername();
+        return super.getUsername();
     }
 
     @Override

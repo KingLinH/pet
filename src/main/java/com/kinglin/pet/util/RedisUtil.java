@@ -36,7 +36,7 @@ public class RedisUtil {
     public static final long REDIS_DEFAULT_EXPIRE_TIME = 60 * 60;
     public static final TimeUnit REDIS_DEFAULT_EXPIRE_TIMEUNIT = TimeUnit.SECONDS;
 
-    // 通用 相关操作 begin -----------------------------------------------------------------------------------------------
+    // region 通用相关操作
 
     /**
      * 返回指定key的剩余存活时间，单位 秒
@@ -74,9 +74,9 @@ public class RedisUtil {
         return redisTemplate.hasKey(redisKey);
     }
 
-    // 通用 相关操作 end -------------------------------------------------------------------------------------------------
+    // endregion
 
-    // ZSET 相关操作 begin ----------------------------------------------------------------------------------------------
+    // region zSET相关操作
     /**
      * 取出整个set的所有记录
      * @param key
@@ -195,11 +195,9 @@ public class RedisUtil {
         return result;
     }
 
+    // endregion
 
-    // ZSET 相关操作 end ------------------------------------------------------------------------------------------------
-
-
-    // SET 相关操作 begin -----------------------------------------------------------------------------------------------
+    // region SET相关操作
 
     /**
      * set集合获取
@@ -268,10 +266,9 @@ public class RedisUtil {
         return redisTemplate.opsForSet().members(key);
     }
 
-    // SET 相关操作 end -------------------------------------------------------------------------------------------------
+    // endregion
 
-
-    // String 相关操作 begin --------------------------------------------------------------------------------------------
+    // region String相关操作
     /**
      * 存储简单数据类型
      * 不用更新的缓存信息
@@ -396,12 +393,9 @@ public class RedisUtil {
         redisTemplate.opsForValue().getOperations().delete(key);
     }
 
+    // endregion
 
-    // String 相关操作 end ----------------------------------------------------------------------------------------------
-
-
-
-    // Hash 相关操作 start ----------------------------------------------------------------------------------------------
+    // region Hash相关操作
     /**
      * 从redis中获取map数据
      *
@@ -461,13 +455,9 @@ public class RedisUtil {
     public Long hDelete(String key, Object... hashKeys) {
         return redisTemplate.opsForHash().delete(key, hashKeys);
     }
+    // endregion
 
-
-    // Hash 相关操作 end ------------------------------------------------------------------------------------------------
-
-
-
-    // List 相关操作 start ----------------------------------------------------------------------------------------------
+    // region List相关操作
     /**
      * 把list存入redis
      * @param key
@@ -495,12 +485,7 @@ public class RedisUtil {
         }
         return resultList;
     }
-    /*public List getAllList(String key) {
-        return this.redisTemplate.opsForList().range(key, 0, -1);
-    }*/
-
-    // List 相关操作 end ------------------------------------------------------------------------------------------------
-
+    // endregion
 
     /**
      * 设置一个有效期至午夜12点的缓存

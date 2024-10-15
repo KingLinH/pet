@@ -16,7 +16,7 @@ import java.util.Collections;
 public class CodeGenerator {
 
     private static final String PROJECT_PATH = System.getProperty("user.dir");
-    private static final String URL = "jdbc:mysql://192.168.4.32:3306/pet?characterEncoding=utf-8&serverTimeZone=UTC&allowPublicKeyRetrieval=true";
+    private static final String URL = "jdbc:mysql://192.168.18.128:33065/pet?characterEncoding=utf-8&serverTimeZone=UTC&allowPublicKeyRetrieval=true";
     private static final String USERNAME = "root";
     private static final String PASSWORD = "123456";
     private static final String PACKAGE_NAME = "com.kinglin.pet";
@@ -39,7 +39,7 @@ public class CodeGenerator {
     }
 
     public static void main(String[] args) {
-        String[] tableName = {"appointment", "owner", "pet", "service", "store"};
+        String[] tableName = {"note"};
         CodeGenerator.execute(tableName);
     }
 

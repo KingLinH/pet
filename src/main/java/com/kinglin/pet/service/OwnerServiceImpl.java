@@ -9,10 +9,7 @@ import com.kinglin.pet.enums.GenderEnum;
 import com.kinglin.pet.model.LoginUser;
 import com.kinglin.pet.model.Result;
 import com.kinglin.pet.model.vo.OwnerInfoVO;
-import com.kinglin.pet.util.MD5Util;
-import io.swagger.models.auth.In;
 import org.springframework.beans.BeanUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -83,6 +80,7 @@ public class OwnerServiceImpl extends ServiceImpl<OwnerMapper, Owner> implements
             throw new UsernameNotFoundException("用户名不存在");
         }
         LoginUser loginUser = new LoginUser();
+        BeanUtils.copyProperties(owner, loginUser);
         loginUser.setOwner(owner);
         return loginUser;
     }
